@@ -1,11 +1,14 @@
 name: Java CI/CD Maven Workflow
 
-# 1. Kích hoạt workflow khi có sự kiện push hoặc pull_request
 on:
   push:
     branches: [ "main", "dev" ]
   pull_request:
     branches: [ "main" ]
+  permissions:
+    contents: read
+    pull-requests: write
+    checks: write
 
 jobs:
   build:
@@ -54,3 +57,12 @@ jobs:
            name: jacoco-coverage-report
            path: Bai 9.2/target/site/jacoco/
            retention-days: 7
+
+       - name: Checkstyle Inline Review
+         if: failure() || always()
+         uses: dbelyaev/action-checkstyle@v1.4
+         with:
+           github_token: ${{ secrets.GITHUB_TOKEN }}
+           reporter: github-pr-review
+           level: warning
+           workdir: Bai 9.2
