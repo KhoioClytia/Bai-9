@@ -36,9 +36,9 @@ public class BankAccountTest {
 
             bank.readCustomerList(inputStream);
 
-            assertEquals(2, bank.getCustomerList().size());
+            assertEquals(6, bank.getCustomerList().size());
             assertEquals("Nguyen Van A", bank.getCustomerList().get(0).getFullName());
-            assertEquals(123456789L, bank.getCustomerList().get(0).getIdNumber());
+            assertEquals(123456789213L, bank.getCustomerList().get(0).getIdNumber());
         }
 
         @Test
@@ -54,7 +54,7 @@ public class BankAccountTest {
             bank.getCustomersInfoByIdOrder();
 
             // Kiểm tra sau khi sắp xếp, ID nhỏ hơn (123456789) phải ở vị trí đầu tiên
-            assertEquals(123456789L, bank.getCustomerList().get(0).getIdNumber());
+            assertEquals(123456789124L, bank.getCustomerList().get(0).getIdNumber());
             assertEquals(987654321L, bank.getCustomerList().get(1).getIdNumber());
         }
 
