@@ -40,3 +40,16 @@ jobs:
            name: math-utils-app-jar
            path: Bai 9.2/target/*.jar
            retention-days: 7
+             # Thực thi vòng đời verify (gồm compile, test, jacoco report & jacoco check)
+                             - name: Run Maven Verify & JaCoCo Coverage Check
+                             working-directory: ./Bai 9.2   # Điều chỉnh đúng thư mục chứa pom.xml
+                             run: mvn clean verify
+                               
+                               # Upload báo cáo JaCoCo HTML làm Artifact
+                               - name: Upload JaCoCo Coverage Report
+                                 if: always() # Đảm bảo tải lên kể cả khi build thất bại để dễ debug
+                                 uses: actions/upload-artifact@v4
+                                 with:
+                                   name: jacoco-coverage-report
+                                   path: Bai 9.2/target/site/jacoco/   # Đường dẫn tới thư mục báo cáo
+                                   retention-days: 7
