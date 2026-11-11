@@ -24,14 +24,16 @@ jobs:
           cache: 'maven'
 
       - name: Run Unit Tests
+        working-directory: ./Bai 9.2
         run: mvn test
 
       - name: Package Application
+        working-directory: ./Bai 9.2
         run: mvn package
 
       - name: Upload JAR Artifact
         uses: actions/upload-artifact@v4
         with:
           name: math-utils-app-jar
-          path: target/*.jar
+          path: Bai 9.2/target/*.jar
           retention-days: 7
