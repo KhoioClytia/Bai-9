@@ -25,7 +25,7 @@ jobs:
            java-version: '17'
            distribution: 'temurin'
            cache: 'maven'
-           cache-dependency-path: 'Bai 9.2/pom.xml
+           cache-dependency-path: 'Bai 9.2/pom.xml'
 
        - name: Run Unit Tests
          working-directory: ./Bai 9.2
