@@ -19,12 +19,13 @@ jobs:
        - name: Checkout repository code
          uses: actions/checkout@v4
 
-       - name: Set up JDK 17
+       - name: Set up JDK 17 with Maven Cache
          uses: actions/setup-java@v4
          with:
-          java-version: '17'
-          distribution: 'temurin'
-          cache: 'maven'
+           java-version: '17'
+           distribution: 'temurin'
+           cache: 'maven'
+           cache-dependency-path: 'Bai 9.2/pom.xml
 
        - name: Run Unit Tests
          working-directory: ./Bai 9.2
@@ -42,14 +43,14 @@ jobs:
            retention-days: 7
 
        - name: Run Maven Verify & JaCoCo Coverage Check
-         working-directory: ./Bai 9.2   # Điều chỉnh đúng thư mục chứa pom.xml
+         working-directory: ./Bai 9.2
          run: mvn clean verify
                                
-                               # Upload báo cáo JaCoCo HTML làm Artifact
+
        - name: Upload JaCoCo Coverage Report
-         if: always() # Đảm bảo tải lên kể cả khi build thất bại để dễ debug
+         if: always()
          uses: actions/upload-artifact@v4
          with:
            name: jacoco-coverage-report
-           path: Bai 9.2/target/site/jacoco/   # Đường dẫn tới thư mục báo cáo
+           path: Bai 9.2/target/site/jacoco/
            retention-days: 7
